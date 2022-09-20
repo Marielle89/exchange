@@ -30,17 +30,22 @@ import (
 func main() {
 	client := exchange.NewClient()
 
-	rate, _ := client.Rate(context.Background(),
+	rate, errRate := client.Rate(context.Background(),
 		exchange.USD,
 		exchange.UAH,
 	)
+	if errRate == nil {
+		fmt.Println(rate)
+	}
 
-	amount, _ := client.Amount(context.Background(),
+	amount, errAmount := client.Amount(context.Background(),
 		exchange.USD,
 		exchange.UAH,
 		155.55,
 	)
-	fmt.Print(rate)
-	fmt.Print(amount)
+	
+	if errAmount == nil {
+		fmt.Println(amount)
+	}
 }
 ```
